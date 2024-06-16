@@ -36,9 +36,14 @@ digit   [0-9]
 "!=" {
     return NOTEQ;
 }
-[ \t\n]+ ;  // 忽略空格、制表符和换行符
-. {
-    yyerror("Unexpected character");
+"\n" {
+    return NEWLINE;
+}
+"(" {
+    return LPAREN;
+}
+")" {
+    return RPAREN;
 }
 %%
 int yywrap(void)

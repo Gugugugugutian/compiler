@@ -282,31 +282,31 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 	*yy_cp = '\0'; \
 	yy_c_buf_p = yy_cp;
 
-#define YY_NUM_RULES 13
-#define YY_END_OF_BUFFER 14
+#define YY_NUM_RULES 14
+#define YY_END_OF_BUFFER 15
 static yyconst short int yy_accept[23] =
     {   0,
-        0,    0,   14,   12,   11,   11,    7,   12,    1,    4,
-       12,    3,   12,   11,   10,    5,    1,    8,    2,    9,
+        0,    0,   15,   14,   11,    7,   14,   12,   13,    1,
+        4,   14,    3,   14,   10,    5,    1,    8,    2,    9,
         6,    0
     } ;
 
 static yyconst int yy_ec[256] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    4,    1,    1,    1,    1,    5,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    6,    6,    6,
-        6,    6,    6,    6,    6,    6,    6,    1,    1,    7,
-        8,    9,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    3,    1,    1,    1,    1,    4,    1,    5,
+        6,    1,    1,    1,    1,    1,    1,    7,    7,    7,
+        7,    7,    7,    7,    7,    7,    7,    1,    1,    8,
+        9,   10,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
 
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,   10,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,   11,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -323,39 +323,40 @@ static yyconst int yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static yyconst int yy_meta[11] =
+static yyconst int yy_meta[12] =
     {   0,
-        1,    2,    2,    1,    1,    1,    1,    1,    1,    1
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1
     } ;
 
-static yyconst short int yy_base[24] =
+static yyconst short int yy_base[23] =
     {   0,
-        0,    0,   20,   21,    0,    0,   11,   13,   11,    8,
-        7,    6,    3,    0,   21,   21,    6,   21,   21,   21,
-       21,   21,    9
+        0,    0,   20,   21,   21,   10,   14,   21,   21,   10,
+        7,    6,    5,    2,   21,   21,    5,   21,   21,   21,
+       21,   21
     } ;
 
-static yyconst short int yy_def[24] =
+static yyconst short int yy_def[23] =
     {   0,
-       22,    1,   22,   22,   23,   23,   22,   22,   22,   22,
-       22,   22,   22,   23,   22,   22,   22,   22,   22,   22,
-       22,    0,   22
+       22,    1,   22,   22,   22,   22,   22,   22,   22,   22,
+       22,   22,   22,   22,   22,   22,   22,   22,   22,   22,
+       22,    0
     } ;
 
-static yyconst short int yy_nxt[32] =
+static yyconst short int yy_nxt[33] =
     {   0,
         4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
        14,   17,   21,   20,   19,   18,   17,   16,   15,   22,
         3,   22,   22,   22,   22,   22,   22,   22,   22,   22,
-       22
+       22,   22
     } ;
 
-static yyconst short int yy_chk[32] =
+static yyconst short int yy_chk[33] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-       23,   17,   13,   12,   11,   10,    9,    8,    7,    3,
+        1,   17,   14,   13,   12,   11,   10,    7,    6,    3,
        22,   22,   22,   22,   22,   22,   22,   22,   22,   22,
-       22
+       22,   22
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -375,7 +376,7 @@ char *yytext;
     #include <stdio.h>
     #include "mytool.tab.h"
     #include <stdlib.h>
-#line 379 "lex.yy.c"
+#line 380 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -528,7 +529,7 @@ YY_DECL
 
 #line 7 ".\\mytool.l"
 
-#line 532 "lex.yy.c"
+#line 533 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -685,21 +686,30 @@ YY_RULE_SETUP
 case 11:
 YY_RULE_SETUP
 #line 39 ".\\mytool.l"
-;  // 忽略空格、制表符和换行符
+{
+    return NEWLINE;
+}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 40 ".\\mytool.l"
+#line 42 ".\\mytool.l"
 {
-    yyerror("Unexpected character");
+    return LPAREN;
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 43 ".\\mytool.l"
+#line 45 ".\\mytool.l"
+{
+    return RPAREN;
+}
+	YY_BREAK
+case 14:
+YY_RULE_SETUP
+#line 48 ".\\mytool.l"
 ECHO;
 	YY_BREAK
-#line 703 "lex.yy.c"
+#line 713 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1585,7 +1595,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 43 ".\\mytool.l"
+#line 48 ".\\mytool.l"
 
 int yywrap(void)
 {
