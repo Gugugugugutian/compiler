@@ -21,8 +21,10 @@
 %nonassoc NOT
 %%
 S: E { 
-    printf("Output: %s, %d, %d\n", $1 ? "TRUE" : "FALSE", compare_count, short_circuit_count); 
-    return 0; 
+    {
+		printf("Output: %s, %d, %d\n", $1 ? "TRUE" : "FALSE", compare_count, short_circuit_count); 
+    	return 0; 
+	}
 }
 ;
 E: E AND E { 

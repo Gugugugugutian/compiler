@@ -1331,8 +1331,8 @@ yyreduce:
 /* Line 1455 of yacc.c  */
 #line 23 "mytool.y"
     { 
-    printf("Output: %s, %d, %d\n", (yyvsp[(1) - (1)]) ? "TRUE" : "FALSE", compare_count, short_circuit_count); 
-    return 0; 
+    {printf("Output: %s, %d, %d\n", (yyvsp[(1) - (1)]) ? "TRUE" : "FALSE", compare_count, short_circuit_count); 
+    return 0; }
 ;}
     break;
 
