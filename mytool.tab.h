@@ -43,7 +43,12 @@
      LT = 259,
      EQ = 260,
      GT = 261,
-     AND = 262
+     AND = 262,
+     OR = 263,
+     NOT = 264,
+     LTEQ = 265,
+     GTEQ = 266,
+     NOTEQ = 267
    };
 #endif
 

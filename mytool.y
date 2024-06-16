@@ -10,8 +10,15 @@
 %token EQ
 %token GT
 %token AND
+%token OR
+%token NOT
+%token LTEQ
+%token GTEQ
+%token NOTEQ
+%left OR
 %left AND
-%left LT GT EQ
+%left LT GT LTEQ GTEQ EQ NOTEQ
+%nonassoc NOT
 %%
 S: E { 
     printf("Output: %s, %d, %d\n", $1 ? "TRUE" : "FALSE", compare_count, short_circuit_count); 
@@ -27,6 +34,21 @@ E: E AND E {
         short_circuit_count += 1;
     }
 }
+ | E OR E { 
+    if ($1) {
+        $$ = 1;
+        short_circuit_count += 1;
+    } else if ($3) {
+        $$ = 1;
+        short_circuit_count += 0;
+    } else {
+        $$ = 0;
+        short_circuit_count += 0;
+    }
+}
+ | NOT E { 
+    $$ = !$2; 
+}
  | R { $$ = $1; }
 ;
 R: VALUE LT VALUE { 
@@ -39,6 +61,18 @@ R: VALUE LT VALUE {
 }
  | VALUE GT VALUE { 
     $$ = ($1 > $3); 
+    compare_count++; 
+}
+ | VALUE LTEQ VALUE { 
+    $$ = ($1 <= $3); 
+    compare_count++; 
+}
+ | VALUE GTEQ VALUE { 
+    $$ = ($1 >= $3); 
+    compare_count++; 
+}
+ | VALUE NOTEQ VALUE { 
+    $$ = ($1 != $3); 
     compare_count++; 
 }
 ;

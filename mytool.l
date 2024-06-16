@@ -21,6 +21,21 @@ digit   [0-9]
 "&&" {
     return AND;
 }
+"||" {
+    return OR;
+}
+"!" {
+    return NOT;
+}
+"<=" {
+    return LTEQ;
+}
+">=" {
+    return GTEQ;
+}
+"!=" {
+    return NOTEQ;
+}
 [ \t\n]+ ;  // 忽略空格、制表符和换行符
 . {
     yyerror("Unexpected character");
