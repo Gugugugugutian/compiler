@@ -2,8 +2,17 @@
     #include <stdio.h>
     int yylex(void);
     void yyerror(char const *);
-    int compare_count = 0;
-    int short_circuit_count = 0;
+
+	#ifndef BTOD_H_INCLUDED
+	#define BTOD_H_INCLUDED
+	typedef struct
+	{
+   	 int val;
+   	 int total;
+   	 int short1;
+	} myStruct; 
+	#endif
+	#define YYSTYPE myStruct
 %}
 %token NEWLINE
 %token VALUE
@@ -27,57 +36,59 @@
 
 %%
 S: E NEWLINE { 
-    printf("Output: %s, %d, %d\n", $1 ? "TRUE" : "FALSE", compare_count, short_circuit_count); 
+    printf("Output: %s, %d, %d\n", $1.val ? "TRUE" : "FALSE", $1.total, $1.short1); 
     return 0; 
 }
 ;
 E: E AND E { 
-    if ($1) {
-        $$ = $3;
-        short_circuit_count += 0;
+    if ($1.val) {
+        $$.val = $3.val;
     } else {
-        $$ = 0;
-        short_circuit_count += 1;
+        $$.val = 0;
+        $$.short1 += $3.total;
     }
+	$$.total = $1.total + $3.total;
 }
  | E OR E { 
-    if ($1) {
-        $$ = 1;
-        short_circuit_count += 1;
+    if ($1.val) {
+        $$.val = $1.val;
+        $$.short1 += $3.total;
     } else {
-        $$ = $3;
-        short_circuit_count += 0;
+        $$.val = $3.val;
     }
+	$$.total = $1.total + $3.total;
 }
  | NOT E { 
-    $$ = !$2; 
+    $$.val = !$2.val; 
+	$$.total = $2.total;
+	$$.short1 = $2.short1;
 }
- | LPAREN E RPAREN { $$ = $2; }
- | R { $$ = $1; }
+ | LPAREN E RPAREN { $$.val = $2.val; }
+ | R { $$.val = $1.val; }
 ;
 R: VALUE LT VALUE { 
-    $$ = ($1 < $3); 
-    compare_count++; 
+    $$.val = ($1.val < $3.val); 
+	$$.total = 1; $$.short1 = 0;
 }
  | VALUE EQ VALUE { 
-    $$ = ($1 == $3); 
-    compare_count++; 
+    $$.val = ($1.val == $3.val); 
+	$$.total = 1; $$.short1 = 0;
 }
  | VALUE GT VALUE { 
-    $$ = ($1 > $3); 
-    compare_count++; 
+    $$.val = ($1.val > $3.val); 
+	$$.total = 1; $$.short1 = 0;
 }
  | VALUE LTEQ VALUE { 
-    $$ = ($1 <= $3); 
-    compare_count++; 
+    $$.val = ($1.val <= $3.val); 
+	$$.total = 1; $$.short1 = 0;
 }
  | VALUE GTEQ VALUE { 
-    $$ = ($1 >= $3); 
-    compare_count++; 
+    $$.val = ($1.val >= $3.val); 
+	$$.total = 1; $$.short1 = 0;
 }
  | VALUE NOTEQ VALUE { 
-    $$ = ($1 != $3); 
-    compare_count++; 
+    $$.val = ($1.val != $3.val); 
+	$$.total = 1; $$.short1 = 0;
 }
 ;
 %%

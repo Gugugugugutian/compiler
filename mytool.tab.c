@@ -73,12 +73,21 @@
     #include <stdio.h>
     int yylex(void);
     void yyerror(char const *);
-    int compare_count = 0;
-    int short_circuit_count = 0;
+
+	#ifndef BTOD_H_INCLUDED
+	#define BTOD_H_INCLUDED
+	typedef struct
+	{
+   	 int val;
+   	 int total;
+   	 int short1;
+	} myStruct; 
+	#endif
+	#define YYSTYPE myStruct
 
 
 /* Line 189 of yacc.c  */
-#line 82 "mytool.tab.c"
+#line 91 "mytool.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -135,7 +144,7 @@ typedef int YYSTYPE;
 
 
 /* Line 264 of yacc.c  */
-#line 139 "mytool.tab.c"
+#line 148 "mytool.tab.c"
 
 #ifdef short
 # undef short
@@ -423,8 +432,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    29,    29,    34,    43,    52,    55,    56,    58,    62,
-      66,    70,    74,    78
+       0,    38,    38,    43,    52,    61,    66,    67,    69,    73,
+      77,    81,    85,    89
 };
 #endif
 
@@ -1334,9 +1343,9 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 29 "mytool.y"
+#line 38 "mytool.y"
     { 
-    printf("Output: %s, %d, %d\n", (yyvsp[(1) - (2)]) ? "TRUE" : "FALSE", compare_count, short_circuit_count); 
+    printf("Output: %s, %d, %d\n", (yyvsp[(1) - (2)]).val ? "TRUE" : "FALSE", (yyvsp[(1) - (2)]).total, (yyvsp[(1) - (2)]).short1); 
     return 0; 
 ;}
     break;
@@ -1344,120 +1353,122 @@ yyreduce:
   case 3:
 
 /* Line 1455 of yacc.c  */
-#line 34 "mytool.y"
+#line 43 "mytool.y"
     { 
-    if ((yyvsp[(1) - (3)])) {
-        (yyval) = (yyvsp[(3) - (3)]);
-        short_circuit_count += 0;
+    if ((yyvsp[(1) - (3)]).val) {
+        (yyval).val = (yyvsp[(3) - (3)]).val;
     } else {
-        (yyval) = 0;
-        short_circuit_count += 1;
+        (yyval).val = 0;
+        (yyval).short1 += (yyvsp[(3) - (3)]).total;
     }
+	(yyval).total = (yyvsp[(1) - (3)]).total + (yyvsp[(3) - (3)]).total;
 ;}
     break;
 
   case 4:
 
 /* Line 1455 of yacc.c  */
-#line 43 "mytool.y"
+#line 52 "mytool.y"
     { 
-    if ((yyvsp[(1) - (3)])) {
-        (yyval) = 1;
-        short_circuit_count += 1;
+    if ((yyvsp[(1) - (3)]).val) {
+        (yyval).val = (yyvsp[(1) - (3)]).val;
+        (yyval).short1 += (yyvsp[(3) - (3)]).total;
     } else {
-        (yyval) = (yyvsp[(3) - (3)]);
-        short_circuit_count += 0;
+        (yyval).val = (yyvsp[(3) - (3)]).val;
     }
+	(yyval).total = (yyvsp[(1) - (3)]).total + (yyvsp[(3) - (3)]).total;
 ;}
     break;
 
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 52 "mytool.y"
+#line 61 "mytool.y"
     { 
-    (yyval) = !(yyvsp[(2) - (2)]); 
+    (yyval).val = !(yyvsp[(2) - (2)]).val; 
+	(yyval).total = (yyvsp[(2) - (2)]).total;
+	(yyval).short1 = (yyvsp[(2) - (2)]).short1;
 ;}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 55 "mytool.y"
-    { (yyval) = (yyvsp[(2) - (3)]); ;}
+#line 66 "mytool.y"
+    { (yyval).val = (yyvsp[(2) - (3)]).val; ;}
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 56 "mytool.y"
-    { (yyval) = (yyvsp[(1) - (1)]); ;}
+#line 67 "mytool.y"
+    { (yyval).val = (yyvsp[(1) - (1)]).val; ;}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 58 "mytool.y"
+#line 69 "mytool.y"
     { 
-    (yyval) = ((yyvsp[(1) - (3)]) < (yyvsp[(3) - (3)])); 
-    compare_count++; 
+    (yyval).val = ((yyvsp[(1) - (3)]).val < (yyvsp[(3) - (3)]).val); 
+	(yyval).total = 1; (yyval).short1 = 0;
 ;}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 62 "mytool.y"
+#line 73 "mytool.y"
     { 
-    (yyval) = ((yyvsp[(1) - (3)]) == (yyvsp[(3) - (3)])); 
-    compare_count++; 
+    (yyval).val = ((yyvsp[(1) - (3)]).val == (yyvsp[(3) - (3)]).val); 
+	(yyval).total = 1; (yyval).short1 = 0;
 ;}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 66 "mytool.y"
+#line 77 "mytool.y"
     { 
-    (yyval) = ((yyvsp[(1) - (3)]) > (yyvsp[(3) - (3)])); 
-    compare_count++; 
+    (yyval).val = ((yyvsp[(1) - (3)]).val > (yyvsp[(3) - (3)]).val); 
+	(yyval).total = 1; (yyval).short1 = 0;
 ;}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 70 "mytool.y"
+#line 81 "mytool.y"
     { 
-    (yyval) = ((yyvsp[(1) - (3)]) <= (yyvsp[(3) - (3)])); 
-    compare_count++; 
+    (yyval).val = ((yyvsp[(1) - (3)]).val <= (yyvsp[(3) - (3)]).val); 
+	(yyval).total = 1; (yyval).short1 = 0;
 ;}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 74 "mytool.y"
+#line 85 "mytool.y"
     { 
-    (yyval) = ((yyvsp[(1) - (3)]) >= (yyvsp[(3) - (3)])); 
-    compare_count++; 
+    (yyval).val = ((yyvsp[(1) - (3)]).val >= (yyvsp[(3) - (3)]).val); 
+	(yyval).total = 1; (yyval).short1 = 0;
 ;}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 78 "mytool.y"
+#line 89 "mytool.y"
     { 
-    (yyval) = ((yyvsp[(1) - (3)]) != (yyvsp[(3) - (3)])); 
-    compare_count++; 
+    (yyval).val = ((yyvsp[(1) - (3)]).val != (yyvsp[(3) - (3)]).val); 
+	(yyval).total = 1; (yyval).short1 = 0;
 ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1461 "mytool.tab.c"
+#line 1472 "mytool.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1669,7 +1680,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 83 "mytool.y"
+#line 94 "mytool.y"
 
 int main()
 {
