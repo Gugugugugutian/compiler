@@ -73,10 +73,12 @@
     #include <stdio.h>
     int yylex(void);
     void yyerror(char const *);
+    int compare_count = 0;
+    int short_circuit_count = 0;
 
 
 /* Line 189 of yacc.c  */
-#line 80 "mytool.tab.c"
+#line 82 "mytool.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -125,7 +127,7 @@ typedef int YYSTYPE;
 
 
 /* Line 264 of yacc.c  */
-#line 129 "mytool.tab.c"
+#line 131 "mytool.tab.c"
 
 #ifdef short
 # undef short
@@ -409,7 +411,7 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    14,    14,    16,    17,    19,    20,    21
+       0,    16,    16,    21,    30,    32,    36,    40
 };
 #endif
 
@@ -1310,49 +1312,69 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 14 "mytool.y"
-    { printf("Output: %s, 2, %d\n", (yyvsp[(1) - (1)]) ? "TRUE" : "FALSE", !(yyvsp[(1) - (1)])); return 0; ;}
+#line 16 "mytool.y"
+    { 
+    printf("Output: %s, %d, %d\n", (yyvsp[(1) - (1)]) ? "TRUE" : "FALSE", compare_count, short_circuit_count); 
+    return 0; 
+;}
     break;
 
   case 3:
 
 /* Line 1455 of yacc.c  */
-#line 16 "mytool.y"
-    { (yyval) = ((yyvsp[(1) - (3)]) && (yyvsp[(3) - (3)])); ;}
+#line 21 "mytool.y"
+    { 
+    if ((yyvsp[(1) - (3)])) {
+        (yyval) = (yyvsp[(3) - (3)]);
+        short_circuit_count += 0;
+    } else {
+        (yyval) = 0;
+        short_circuit_count += 1;
+    }
+;}
     break;
 
   case 4:
 
 /* Line 1455 of yacc.c  */
-#line 17 "mytool.y"
+#line 30 "mytool.y"
     { (yyval) = (yyvsp[(1) - (1)]); ;}
     break;
 
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 19 "mytool.y"
-    { (yyval) = ((yyvsp[(1) - (3)]) < (yyvsp[(3) - (3)])); ;}
+#line 32 "mytool.y"
+    { 
+    (yyval) = ((yyvsp[(1) - (3)]) < (yyvsp[(3) - (3)])); 
+    compare_count++; 
+;}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 20 "mytool.y"
-    { (yyval) = ((yyvsp[(1) - (3)]) == (yyvsp[(3) - (3)])); ;}
+#line 36 "mytool.y"
+    { 
+    (yyval) = ((yyvsp[(1) - (3)]) == (yyvsp[(3) - (3)])); 
+    compare_count++; 
+;}
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 21 "mytool.y"
-    { (yyval) = ((yyvsp[(1) - (3)]) > (yyvsp[(3) - (3)])); ;}
+#line 40 "mytool.y"
+    { 
+    (yyval) = ((yyvsp[(1) - (3)]) > (yyvsp[(3) - (3)])); 
+    compare_count++; 
+;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1356 "mytool.tab.c"
+#line 1378 "mytool.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1564,7 +1586,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 23 "mytool.y"
+#line 45 "mytool.y"
 
 int main()
 {
