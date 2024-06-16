@@ -1,0 +1,3 @@
+bison -d mytool.y
+flex -omytool.yy.c mytool.l
+gcc lex.yy.c mytool.tab.c -o calc -L .\lib\lib\libfl.a
