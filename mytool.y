@@ -63,8 +63,16 @@ E: E AND E {
 	$$.total = $2.total;
 	$$.short1 = $2.short1;
 }
- | LPAREN E RPAREN { $$.val = $2.val; }
- | R { $$.val = $1.val; }
+ | LPAREN E RPAREN { 
+    $$.val = $2.val; 
+    $$.total = $2.total; 
+    $$.short1 = $2.short1;
+}
+ | R { 
+    $$.val = $1.val; 
+    $$.total = 1;
+    $$.short1 = 0;    
+}
 ;
 R: VALUE LT VALUE { 
     $$.val = ($1.val < $3.val); 

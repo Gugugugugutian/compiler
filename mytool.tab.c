@@ -432,8 +432,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    38,    38,    43,    52,    61,    66,    67,    69,    73,
-      77,    81,    85,    89
+       0,    38,    38,    43,    52,    61,    66,    71,    77,    81,
+      85,    89,    93,    97
 };
 #endif
 
@@ -1395,20 +1395,28 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 66 "mytool.y"
-    { (yyval).val = (yyvsp[(2) - (3)]).val; ;}
+    { 
+    (yyval).val = (yyvsp[(2) - (3)]).val; 
+    (yyval).total = (yyvsp[(2) - (3)]).total; 
+    (yyval).short1 = (yyvsp[(2) - (3)]).short1;
+;}
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 67 "mytool.y"
-    { (yyval).val = (yyvsp[(1) - (1)]).val; ;}
+#line 71 "mytool.y"
+    { 
+    (yyval).val = (yyvsp[(1) - (1)]).val; 
+    (yyval).total = 1;
+    (yyval).short1 = 0;    
+;}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 69 "mytool.y"
+#line 77 "mytool.y"
     { 
     (yyval).val = ((yyvsp[(1) - (3)]).val < (yyvsp[(3) - (3)]).val); 
 	(yyval).total = 1; (yyval).short1 = 0;
@@ -1418,7 +1426,7 @@ yyreduce:
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 73 "mytool.y"
+#line 81 "mytool.y"
     { 
     (yyval).val = ((yyvsp[(1) - (3)]).val == (yyvsp[(3) - (3)]).val); 
 	(yyval).total = 1; (yyval).short1 = 0;
@@ -1428,7 +1436,7 @@ yyreduce:
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 77 "mytool.y"
+#line 85 "mytool.y"
     { 
     (yyval).val = ((yyvsp[(1) - (3)]).val > (yyvsp[(3) - (3)]).val); 
 	(yyval).total = 1; (yyval).short1 = 0;
@@ -1438,7 +1446,7 @@ yyreduce:
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 81 "mytool.y"
+#line 89 "mytool.y"
     { 
     (yyval).val = ((yyvsp[(1) - (3)]).val <= (yyvsp[(3) - (3)]).val); 
 	(yyval).total = 1; (yyval).short1 = 0;
@@ -1448,7 +1456,7 @@ yyreduce:
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 85 "mytool.y"
+#line 93 "mytool.y"
     { 
     (yyval).val = ((yyvsp[(1) - (3)]).val >= (yyvsp[(3) - (3)]).val); 
 	(yyval).total = 1; (yyval).short1 = 0;
@@ -1458,7 +1466,7 @@ yyreduce:
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 89 "mytool.y"
+#line 97 "mytool.y"
     { 
     (yyval).val = ((yyvsp[(1) - (3)]).val != (yyvsp[(3) - (3)]).val); 
 	(yyval).total = 1; (yyval).short1 = 0;
@@ -1468,7 +1476,7 @@ yyreduce:
 
 
 /* Line 1455 of yacc.c  */
-#line 1472 "mytool.tab.c"
+#line 1480 "mytool.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1680,7 +1688,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 94 "mytool.y"
+#line 102 "mytool.y"
 
 int main()
 {
